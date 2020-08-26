@@ -1,17 +1,33 @@
 from keras.models import Sequential, Model
-from keras.layers import Input, Add, Dense, Activation, BatchNormalization, Flatten, Conv2D, MaxPooling2D
 from keras.initializers import GlorotUniform
+from keras.layers import (
+    Activation,
+    Add,
+    BatchNormalization,
+    Conv2D,
+    Dense,
+    Flatten,
+    Input,
+    MaxPooling2D)
 
 
-def ConvBatchNormReLU(input, filters, kernel_size, name, stride, padding="SAME", seed=None):
+def ConvBatchNormReLU(
+        input,
+        filters,
+        kernel_size,
+        name,
+        stride,
+        padding="SAME",
+        seed=None):
     """
-    Implementation of a convolution followed by a BatchNormalization and a ReLU layer.
+    Implementation of a convolution followed by a BatchNormalization
+    and a ReLU layer.
 
     Arguments:
     input -- input tensor.
-    filters -- python list of integers, defining the number of filters in the CONV layers of the main path.
+    filters -- list of integers, defines number of filters in the CONV layers.
     kernel_size -- integer, size of the convolution filter.
-    name -- integer, used to name the layers, depending on their position in the network.
+    name -- integer, name of layers depending on their position.
     stride -- integer, value for the stride of the conv layer.
     padding -- string/character, padding of the conv layer.
     seed -- integer, random seed for initialization.
@@ -29,15 +45,24 @@ def ConvBatchNormReLU(input, filters, kernel_size, name, stride, padding="SAME",
     return X
 
 
-def ResNetBlock(input, filters, kernel_size, name, stride, padding="SAME", pooling=2, seed=None):
+def ResNetBlock(
+        input,
+        filters,
+        kernel_size,
+        name,
+        stride,
+        padding="SAME",
+        pooling=2,
+        seed=None):
     """
-    Implementation of a convolution followed by a BatchNormalization and a ReLU layer.
+    Implementation of a convolution followed by a BatchNormalization
+    and a ReLU layer.
 
     Arguments:
     input -- input tensor.
-    filters -- python list of integers, defining the number of filters in the CONV layers of the main path.
+    filters -- list of integers, defines number of filters in the CONV layers.
     kernel_size -- integer, size of the convolution filter.
-    name -- integer, used to name the layers, depending on their position in the network.
+    name -- integer, name of layers depending on their position.
     stride -- integer, value for the stride of the conv layer.
     padding -- string/character, padding of the conv layer.
     pooling -- integer, filter size of the MaxPool layer.
@@ -80,7 +105,8 @@ def ResNetBlock(input, filters, kernel_size, name, stride, padding="SAME", pooli
 def ResNet9(input_shape=(28, 28, 1), classes=10, seed=None):
     """
     Implementation of the ResNet9 the following architecture:
-    CONV2D -> BATCHNORM -> RELU -> ResNetBlock -> CONV2D -> BATCHNORM -> RELU -> MAXPOOL -> ResNetBlock -> MAXPOOL -> Dense.
+    CONV2D -> BATCHNORM -> RELU -> ResNetBlock -> CONV2D -> BATCHNORM ->
+    RELU -> MAXPOOL -> ResNetBlock -> MAXPOOL -> Dense.
     Arguments:
     input_shape -- shape of the images of the dataset.
     classes -- integer, number of classes.
